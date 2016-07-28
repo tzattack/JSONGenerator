@@ -1,0 +1,78 @@
+XX-DeviceGroup:1
+XX-DeviceId:device-0
+XX-ClientMac:985FD3360ED1
+XX-ServerMac:B8BC1B289038
+XX-ClientPort:59198
+XX-ServerPort:80
+XX-IpVer:IPV4
+XX-ClientIp:192.168.4.4
+XX-ServerIp:118.67.112.71
+XX-SideOneTunnelId:B8BC1B289038985FD3360ED1
+XX-SideTwoTunnelId:
+XX-NetProtocol:TCP
+XX-Protocol:HTTPBBS
+XX-Time:1469527253 07/26/2016 18:00:53 
+XX-CDP:CDP_HTTP
+XX-Request:YES
+XX-PairId:1
+XX-Method:POST
+XX-RelativeUrl:/bbs/post.php
+XX-Url:http://www.xcar.com.cn/bbs/post.php
+XX-Param:
+XX-Host:www.xcar.com.cn
+XX-Referer:http://www.xcar.com.cn/bbs/viewthread.php?rebuild=ture&tid=26979322&post=1023&extra=
+XX-UserAgent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
+XX-ContentType:application/x-www-form-urlencoded; charset=UTF-
+XX-Range:
+XX-RealContentLength:284
+XX-ResponseContentComplete:UNKNOWN
+XX-XForwardedFor:
+XX-Via:
+XX-ContentEncoding:
+XX-AcceptLanguage:zh-CN,zh;q=0.8,
+XX-ResponseCode:200
+XX-SessionId:0404a8c0477043763ee75000579734d60004
+XX-Useful:YES
+XX-SiteName:aikaqiche
+XX-SiteType:HTTPBBS
+XX-Domain:aikaqiche.com
+XX-UserId:�ŷ�123
+XX-Password:
+XX-Type:BBS_POST
+XX-UserWebsiteId:
+XX-TerminalIMEI:
+XX-TerminalIMSI:
+XX-TerminalId:
+XX-TerminalOS:
+XX-TerminalType:
+XX-TerminalName:
+XX-GroupId:
+XX-GroupName:
+XX-PublisherWebsiteId:
+XX-PublisherNickname:
+XX-PublisherId:
+XX-PublishTime:
+XX-PrivacyType:
+XX-AttachmentIds:
+XX-MsgId:
+XX-RepliedMsgId:
+XX-OriginMsgId:
+XX-Subject:
+XX-ContentClassify:
+XX-ProState:EXTRACT_SUCCESS
+
+content:POST /bbs/post.php HTTP/1.1
+Host: www.xcar.com.cn
+Connection: keep-alive
+Content-Length: 284
+Accept: */*
+Origin: http://www.xcar.com.cn
+X-Requested-With: XMLHttpRequest
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+Referer: http://www.xcar.com.cn/bbs/viewthread.php?rebuild=ture&tid=26979322&post=1023&extra=
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2
+Cookie: _Xdwuv=5795b05cae341; _Xdwnewuv=1; uv_firstv_refer=www.google.com//($3)//; uv_firstv_refers=https://www.google.com/; _locationInfo_={url:"http://nanjing.xcar.com.cn/",city_id:"123",province_id:"25", city_name:"%E5%8D%97%E4%BA%AC"}; bdshare_firstime=1469427808792; bbs_cookietime=31536000; bbs_auth=Bhq0tAB6qkULbHFw6JFC4Qll4y6C7hO8PCbZvJWOVytZjD7xtLNf/YbRIkujal1CDA; _discuz_uid=9950763; _discuz_pw=18f4467e5d73809c0537bf63178a290c; _xcar_name=�ŷ�123; _xcar_name_utf8=张飞123; _discuz_vip=5; _xuser_id=10050763; weibo_referer=http://www.xcar.com.cn/; bbs_sid=LkuIbN; bbs_fid1291=1469428293; bdfeedbackID=18; bbs_visitedfid=1023D1291; place_prid=25; place_crid=123; place_ip=121.229.219.200_1; bbs_oldtopics=D26979322D26979252D; bbs_fid1023=1469428924; _Xdwstime=1469428927; xgame_ly=http://www.xcar.com.cn/bbs/post.php?action=newthread&fid=1023&extra=&topicsubmit=yes; xgame_currweb=http://www.xcar.com.cn/bbs/viewthread.php?rebuild=ture&tid=26979322&post=1023&extra=; Hm_lvt_53eb54d089f7b5dd4ae2927686b183e0=1469427808; Hm_lpvt_53eb54d089f7b5dd4ae2927686b183e0=1469428931; QuickMsgQuickId=i489www.xcar.com.cn26
+
+tid=26979322&fid=1023&action=reply&mt=0.5104084007376335&land=lord&message=哈哈，我也是哎&formhash=6fcb7f22&usesig=1&ssid=1469428927&repquote=503559083&replysubmit=yes&repquote_authorid=9950763
