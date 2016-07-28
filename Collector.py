@@ -4,6 +4,7 @@ import Generator
 directories = [name for name in os.listdir('./') if os.path.isdir(os.path.join('./', name))]
 directories.remove(".idea")
 directories.remove("__pycache__")
+directories.remove(".git")
 print(directories)
 
 client_ip = ''
@@ -24,6 +25,10 @@ for dir in directories:
         name = capture_names[capture_counter]
         print(name)
 
+        sheet_directory = './' + directories[counter] + '/result/' + name + '/'
+        print(sheet_directory)
+        sheet_names = [name for name in os.listdir(sheet_directory) if os.path.isfile(os.path.join(sheet_directory, name))]
+        print(len(sheet_names))
         name_counter = 0
         name_divider = 0
         for b in name:
