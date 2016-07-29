@@ -1,3 +1,6 @@
+import json
+
+
 def generator(dir_name, site_type):
     json_file = dir_name + site_type + ".json"
     file = open(json_file, "w")
