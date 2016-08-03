@@ -85,3 +85,32 @@ for d in directories:
 
     counter += 1
 
+
+class Site:
+    __name = ""
+    __support_version = {}
+    __input_output = {}
+    __input = ""
+    __file = []
+
+    def __init__(self, name, support_version, input_output, input, file):
+        self.__name = name
+        self.__support_version = support_version
+        self.__input_output = input_output
+        self.__file = file
+
+    def set_name(self, name):
+        self.__name = name
+
+    def get_name(self):
+        return self.__name
+
+    def set_support_version(self, support_version):
+        self.__support_version = support_version
+
+    def get_support_version(self):
+        return self.__support_version
+
+
+
+

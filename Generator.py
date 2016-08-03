@@ -1,4 +1,4 @@
-import json
+from json import dump
 
 
 def generator(dir_name, site_type):
