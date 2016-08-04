@@ -1,6 +1,7 @@
 from json import dump
+import Collector
 
-
+'''
 def generator(dir_name, site_type):
     json_file = dir_name + site_type + ".json"
     file = open(json_file, "w")
@@ -19,3 +20,6 @@ def generator(dir_name, site_type):
 name = "21CN"
 site = "BBS"
 generator(name, site)
+'''
+
+Collector.collector()
