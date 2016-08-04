@@ -1,12 +1,12 @@
 from json import dump
-import Collector
+import Main
 
-'''
-def generator(dir_name, site_type):
-    json_file = dir_name + site_type + ".json"
+
+def generator(Site):
+    json_file = Site.get_name() + ".json"
     file = open(json_file, "w")
 
-    content = "{\"" + dir_name + "\":\n"
+    content = "{\"" + website.get_name() + "\":\n"
     content += "\t{\n"
     content += "\t\t\"bin\":{\"device:/com/roles/front/app/yjhp/yj_hp\"},\n"
     content += "\t\t\"config\":[{\"device:/com/cfg/yj_hp_in.conf\"},{\"device:/com/cfg/yj_hp_output.conf\"},"
@@ -17,9 +17,5 @@ def generator(dir_name, site_type):
     file.close()
     return 0
 
-name = "21CN"
-site = "BBS"
-generator(name, site)
-'''
 
-Collector.collector()
+

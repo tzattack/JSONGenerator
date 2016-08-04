@@ -1,4 +1,42 @@
 import os
+import json
+
+
+class Site:
+    __web_dir = ""
+    __name = ""
+    __xx_type = ""
+    __input_output = {}
+
+    def __init__(self, web_dir, name, xx_type, input_output):
+        self.__web_dir = web_dir
+        self.__name = name
+        self.__xx_type = xx_type
+        self.__input_output = input_output
+
+    def set_web_dir(self, web_dir):
+        self.__web_dir = web_dir
+
+    def get_web_dir(self):
+        return self.__web_dir
+
+    def set_name(self, name):
+        self.__name = name
+
+    def get_name(self):
+        return self.__name
+
+    def set_xx_type(self, xx_type):
+        self.__xx_type = xx_type
+
+    def get_xx_type(self):
+        return self.__xx_type
+
+    def set_input_output(self, input_output):
+        self.__input_output = input_output
+
+    def get_input_output(self):
+        return self.__input_output
 
 
 def type_check(site_type):
@@ -8,14 +46,38 @@ def type_check(site_type):
         return "Unknown Type"
 
 
-def collector():
+def generator(website):
+    json_file = website.get_web_dir() + website.get_name().lower() + ".json"
+    file = open(json_file, "w")
+
+    content = "{\"" + website.get_name() + "\":"
+    content += "{"
+    content += "bin\":"
+    content += "{\"device:/com/roles/front/app/yjhp/yj_hp\"},"
+    content += "\"config\":"
+    content += "[{\"device:/com/cfg/yj_hp_in.conf\"},"
+    content += "{\"device:/com/cfg/yj_hp_output.conf\"},"
+    content += "{\"snspro:/com/cfg/yj_snp_extract.conf\"},"
+    content += "{\"snspro:/com/cfg/yj_snp_output.conf\"}],"
+    content += "\"input_outputs\":"
+    content += json.dumps(website.get_input_output())
+    content += "}}"
+
+    print(json.dumps(website.get_input_output()))
+    file.write(content)
+    file.close()
+
+    return 0
+
+
+def main():
     name = ""
-    support_version = {}
     input_output = {}
     input = ""
     file_content = []
     file_content_list = ""
     files = {}
+    site_type = ""
 
     directories = [name for name in os.listdir('./') if os.path.isdir(os.path.join('./', name))]
     directories.remove(".idea")
@@ -74,6 +136,7 @@ def collector():
                         # print("\t\t" + domain)
                     elif line_counter == 40:
                         action_type = str(line)[0:len(str(line))-1]
+                        site_type = action_type[8:]
                         # print("\t\t" + str(line))
                     line_counter += 1
 
@@ -87,8 +150,7 @@ def collector():
             input_output[input] = files
             file_content = []
             files = {}
-            print("\tINPUT_OUTPUT:\t" + str(input_output))
-            input_output = {}
+            # print("\tINPUT_OUTPUT:\t" + str(input_output))
 
             # collect information from capture name
             name_counter = 0
@@ -102,6 +164,7 @@ def collector():
                         client_ip += name[name_counter]
                     elif name_divider == 1:
                         brand += name[name_counter]
+                        xx_name = brand
                     elif name_divider == 2:
                         platform += name[name_counter]
                     elif name_divider == 3:
@@ -112,56 +175,34 @@ def collector():
 
             # platform & version to be read in
             # print("\n\tIP:\t" + client_ip)
-            print("\tBrand:\t" + brand)
-            print("\tType:\t" + type_check(brand))
-            print("\tPlatform:\t" + platform)
-            print("\tVersion:\t" + version)
+            # print("\tBrand:\t" + brand)
+            # print("\tType:\t" + type_check(brand))
+            # print("\tPlatform:\t" + platform)
+            # print("\tVersion:\t" + version)
             # print("\tAction:\t" + action)
             client_ip = brand = platform = version = action = ''
             capture_counter += 1
 
+        xx_type = ""
+        site_type_counter = 0
+        for s in site_type:
+            if site_type[site_type_counter] != '_':
+                xx_type += site_type[site_type_counter]
+            else:
+                break
+            site_type_counter += 1
+        # print(xx_type)
+        # print(xx_name)
+
+        web_dir = './' + directories[counter] + '/'
+        website = Site(web_dir, xx_name, xx_type, input_output)
+        generator(website)
+        input_output.clear()
+
         counter += 1
 
+main()
 
-class Site:
-    __name = ""
-    __support_version = {}
-    __input_output = {}
-    __input = ""
-    __file = []
-
-    def __init__(self, name, support_version, input_output, input, file):
-        self.__name = name
-        self.__support_version = support_version
-        self.__input_output = input_output
-        self.__file = file
-
-    def set_name(self, name):
-        self.__name = name
-
-    def get_name(self):
-        return self.__name
-
-    def set_support_version(self, support_version):
-        self.__support_version = support_version
-
-    def get_support_version(self):
-        return self.__support_version
-
-    def set_input_output(self, input_output):
-        self.__input_output = input_output
-
-    def get_input_output(self):
-        return self.__input_output
-
-    def set_file(self, file):
-        self.__file = file
-
-    def get_file(self):
-        return self.__file
-
-
-collector()
 
 
 
