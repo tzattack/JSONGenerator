@@ -49,21 +49,39 @@ def type_check(site_type):
 def generator(website):
     json_file = website.get_web_dir() + website.get_name().lower() + ".json"
     file = open(json_file, "w")
+    i_o_content = website.get_input_output()
+    number = len(i_o_content)
+    print(number)
+    for i in i_o_content:
+        print(i)
+        print(i_o_content[i])
 
-    content = "{\"" + website.get_name() + "\":"
-    content += "{"
-    content += "bin\":"
-    content += "{\"device:/com/roles/front/app/yjhp/yj_hp\"},"
-    content += "\"config\":"
-    content += "[{\"device:/com/cfg/yj_hp_in.conf\"},"
-    content += "{\"device:/com/cfg/yj_hp_output.conf\"},"
-    content += "{\"snspro:/com/cfg/yj_snp_extract.conf\"},"
-    content += "{\"snspro:/com/cfg/yj_snp_output.conf\"}],"
+    content = "{\"" + website.get_name() + "\":\n"
+    content += "{\n"
+    content += "\"bin\":\n"
+    content += "[\"device:/com/roles/front/app/yjhp/yj_hp\"],\n"
+    content += "\"config\":\n"
+    content += "[\"device:/com/cfg/yj_hp_in.conf\",\n"
+    content += "\"device:/com/cfg/yj_hp_output.conf\",\n"
+    content += "\"snspro:/com/cfg/yj_snp_extract.conf\",\n"
+    content += "\"snspro:/com/cfg/yj_snp_output.conf\"],\n"
     content += "\"input_outputs\":"
-    content += json.dumps(website.get_input_output())
-    content += "}}"
+    if number > 1:
+        content += "[\n"
+    counter = 0
+    for i in i_o_content:
+        counter += 1
+        if counter == number:
+            content += "{\n\"input\":\n[\"" + i + \
+                       "\"],\n\"output\":{\n\"dir\":\"device:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
+                       + json.dumps(i_o_content[i]) + "]\n}\n}\n"
+            break
+        content += "{\n\"input\":\n[\"" + i + \
+                   "\"],\n\"output\":{\n\"dir\":\"device:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
+                   + json.dumps(i_o_content[i]) + "]\n}\n},\n"
 
-    print(json.dumps(website.get_input_output()))
+    content += "]\n}\n}"
+
     file.write(content)
     file.close()
 
