@@ -79,8 +79,9 @@ def generator(website):
         content += "{\n\"input\":\n[\"" + i + \
                    "\"],\n\"output\":{\n\"dir\":\"device:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
                    + json.dumps(i_o_content[i]) + "]\n}\n},\n"
-
-    content += "]\n}\n}"
+    if number > 1:
+        content += "]\n"
+    content += "}\n}"
 
     file.write(content)
     file.close()
@@ -146,13 +147,13 @@ def main():
                 sheet_content = sheet_file.readlines()
                 line_counter = 0
                 for line in sheet_content:
-                    if line_counter == 12:
+                    if line.find("Protocol") != -1:
                         protocol = str(line)[0:len(str(line))-1]
                         # print("\t\t" + protocol)
-                    elif line_counter == 37:
+                    elif line.find("Domain") != -1:
                         domain = str(line)[0:len(str(line))-1]
                         # print("\t\t" + domain)
-                    elif line_counter == 40:
+                    elif line.find("XX-Type") != -1:
                         action_type = str(line)[0:len(str(line))-1]
                         site_type = action_type[8:]
                         # print("\t\t" + str(line))
