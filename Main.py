@@ -59,7 +59,7 @@ def generator(website):
     content = "{\"" + website.get_name() + "\":\n"
     content += "{\n"
     content += "\"bin\":\n"
-    content += "[\"device:/com/roles/front/app/yjhp/yj_hp\"],\n"
+    content += "[\"device:/com/roles/front/app/yjhp/yj_hp\",\"snspro:/com/roles/snspro/httpextractor/yj_snp\"],\n"
     content += "\"config\":\n"
     content += "[\"device:/com/cfg/yj_hp_in.conf\",\n"
     content += "\"device:/com/cfg/yj_hp_output.conf\",\n"
@@ -73,11 +73,11 @@ def generator(website):
         counter += 1
         if counter == number:
             content += "{\n\"input\":\n[\"" + i + \
-                       "\"],\n\"output\":{\n\"dir\":\"device:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
+                       ".cap\"],\n\"output\":{\n\"dir\":\"snspro:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
                        + json.dumps(i_o_content[i]) + "]\n}\n}\n"
             break
         content += "{\n\"input\":\n[\"" + i + \
-                   "\"],\n\"output\":{\n\"dir\":\"device:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
+                   ".cap\"],\n\"output\":{\n\"dir\":\"snspro:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
                    + json.dumps(i_o_content[i]) + "]\n}\n},\n"
     if number > 1:
         content += "]\n"
