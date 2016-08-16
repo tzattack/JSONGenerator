@@ -51,10 +51,11 @@ def generator(website):
     file = open(json_file, "w")
     i_o_content = website.get_input_output()
     number = len(i_o_content)
-    print(number)
+    print("\n\tNumber:\t" + str(number))
+    '''
     for i in i_o_content:
         print(i)
-        print(i_o_content[i])
+        print(i_o_content[i])'''
 
     content = "{\"" + website.get_name() + "\":\n"
     content += "{\n"
@@ -69,16 +70,58 @@ def generator(website):
     if number > 1:
         content += "[\n"
     counter = 0
+    http_content = ""
+    ttk_terminal_flag_content = ""
+    ttk_device_info_content = ""
     for i in i_o_content:
+
+        for c in i_o_content[i]:
+            print(c)
+            print(i_o_content[i][c])
+            if c.find("TTKTERMINALFLAG") != -1:
+                if ttk_terminal_flag_content == "":
+                    ttk_terminal_flag_content += "{\"" + c + "\":" + str(i_o_content[i][c]) + "}"
+                else:
+                    ttk_terminal_flag_content += ",{\"" + c + "\":" + str(i_o_content[i][c]) + "}"
+            elif c.find("TTKDEVICEINFO") != -1:
+                if ttk_device_info_content == "":
+                    ttk_device_info_content += "{\"" + c + "\":" + str(i_o_content[i][c]) + "}"
+                else:
+                    ttk_device_info_content += ",{\"" + c + "\":" + str(i_o_content[i][c]) + "}"
+            else:
+                if http_content == "":
+                    http_content += "{\"" + c + "\":" + str(i_o_content[i][c]) + "}"
+                else:
+                    http_content += ",{\"" + c + "\":" + str(i_o_content[i][c]) + "}"
+
         counter += 1
         if counter == number:
             content += "{\n\"input\":\n[\"" + i + \
-                       ".cap\"],\n\"output\":{\n\"dir\":\"snspro:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
-                       + json.dumps(i_o_content[i]) + "]\n}\n}\n"
-            break
-        content += "{\n\"input\":\n[\"" + i + \
-                   ".cap\"],\n\"output\":{\n\"dir\":\"snspro:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
-                   + json.dumps(i_o_content[i]) + "]\n}\n},\n"
+                       ".cap\"],\n\"output\":[{\n\"dir\":\"snspro:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
+                       + http_content + "]\n}\n"
+            if ttk_terminal_flag_content != "":
+                content += ",{\n\"dir\":\"snspro:/ramdisk/front/output/or_ttk_flag\",\n\"files\":[" \
+                       + ttk_terminal_flag_content + "]\n}\n"
+            if ttk_device_info_content != "":
+                content += ",{\n\"dir\":\"snspro:/ramdisk/front/output/or_ttk_info\",\n\"files\":[" \
+                       + ttk_device_info_content + "]\n}\n"
+            content += "]\n}\n"
+        else:
+            content += "{\n\"input\":\n[\"" + i + \
+                   ".cap\"],\n\"output\":[{\n\"dir\":\"snspro:/ramdisk/front/output/yj_snp\",\n\"files\":[" \
+                   + http_content + "]\n}\n"
+            if ttk_terminal_flag_content != "":
+                content += ",{\n\"dir\":\"snspro:/ramdisk/front/output/or_ttk_flag\",\n\"files\":[" \
+                       + ttk_terminal_flag_content + "]\n}\n"
+            if ttk_device_info_content != "":
+                content += ",{\n\"dir\":\"snspro:/ramdisk/front/output/or_ttk_info\",\n\"files\":[" \
+                       + ttk_device_info_content + "]\n}\n"
+            content += "]\n},\n"
+
+        http_content = ""
+        ttk_terminal_flag_content = ""
+        ttk_device_info_content = ""
+
     if number > 1:
         content += "]\n"
     content += "}\n}"
@@ -99,9 +142,12 @@ def main():
     site_type = ""
 
     directories = [name for name in os.listdir('./') if os.path.isdir(os.path.join('./', name))]
-    directories.remove(".idea")
-    directories.remove("__pycache__")
-    directories.remove(".git")
+    try:
+        directories.remove(".idea")
+        directories.remove("__pycache__")
+        directories.remove(".git")
+    except:
+        print("No extra dirs!")
     print(directories)
 
     client_ip = brand = platform = version = action = ''
@@ -123,7 +169,7 @@ def main():
             print("\n###############################################################################################")
 
             # name to be read in
-            # print("\n\tCapture Name:\t" + name)
+            print("\n\tCapture Name:\t" + name)
             input = name
 
             sheet_directory = './' + directories[counter] + '/result/' + name + '/'
