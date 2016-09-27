@@ -193,10 +193,10 @@ def main():
                 sheet_content = sheet_file.readlines()
                 line_counter = 0
                 for line in sheet_content:
-                    if line.find("Protocol") != -1:
+                    if line.find("XX-Protocol") != -1:
                         protocol = str(line)[0:len(str(line))-1]
                         # print("\t\t" + protocol)
-                    elif line.find("Domain") != -1:
+                    elif line.find("XX-Domain") != -1:
                         domain = str(line)[0:len(str(line))-1]
                         # print("\t\t" + domain)
                     elif line.find("XX-Type") != -1:
